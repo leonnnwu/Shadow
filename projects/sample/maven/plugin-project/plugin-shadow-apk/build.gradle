@@ -17,7 +17,7 @@ dependencies {
 //这段buildscript配置的dependencies是为了apply plugin: 'com.tencent.shadow.plugin'能找到实现
 buildscript {
     repositories {
-        if (!System.getenv().containsKey("DISABLE_TENCENT_MAVEN_MIRROR")) {
+        if (System.getenv().containsKey("DISABLE_TENCENT_MAVEN_MIRROR")) {
             maven { url 'https://mirrors.tencent.com/nexus/repository/maven-public/' }
         } else {
             google()

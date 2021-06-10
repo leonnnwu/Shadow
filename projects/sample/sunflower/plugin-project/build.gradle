@@ -51,7 +51,7 @@ buildscript {
     }
 
     repositories {
-        if (!System.getenv().containsKey("DISABLE_TENCENT_MAVEN_MIRROR")) {
+        if (System.getenv().containsKey("DISABLE_TENCENT_MAVEN_MIRROR")) {
             maven { url 'https://mirrors.tencent.com/nexus/repository/maven-public/' }
         } else {
             google()
@@ -84,7 +84,7 @@ plugins {
 
 allprojects {
     repositories {
-        if (!System.getenv().containsKey("DISABLE_TENCENT_MAVEN_MIRROR")) {
+        if (System.getenv().containsKey("DISABLE_TENCENT_MAVEN_MIRROR")) {
             maven { url 'https://mirrors.tencent.com/nexus/repository/maven-public/' }
         } else {
             google()
