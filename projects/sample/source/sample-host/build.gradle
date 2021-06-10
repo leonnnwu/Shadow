@@ -24,6 +24,7 @@ android {
             signingConfig.initWith(buildTypes.debug.signingConfig)
         }
     }
+    // lwu: change where Gradle looks to gather files for each component of a source set
     sourceSets {
         debug {
             assets.srcDir('build/generated/assets/sample-manager/debug/')
@@ -79,7 +80,7 @@ def generateAssets(generateAssetsTask, buildType) {
             moduleName,
             'pluginmanager.apk',
             pluginManagerApkFile,
-            "assemble${buildType.capitalize()}"
+            "assemble${buildType.capitalize()}" // lwu: build task for sample-manager project
     )
 
     def pluginZip = file("${getRootProject().getBuildDir()}/plugin-${buildType}.zip")
@@ -89,12 +90,13 @@ def generateAssets(generateAssetsTask, buildType) {
             'plugin-zip',
             "plugin-${buildType}.zip",
             pluginZip,
-            "package${buildType.capitalize()}Plugin"
+            "package${buildType.capitalize()}Plugin" // lwu: build task for sample-plugin-app project
     )
 
 
 }
 
+// lwu: I suspect the gradle task 'generateAssets' is added by "sourceSets"
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets") {
         generateAssets(task, 'debug')
